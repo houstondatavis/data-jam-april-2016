@@ -86,6 +86,11 @@ function setNeighborhoodAliases(neighborhoods){
   var csvStreamOptions = { delimiter : '\t', endLine : '\n', escapeChar : '"', enclosedChar : '"'};
   var csvStream = csv.createStream(csvStreamOptions);
 
+  // "clean" neighborhood names for matching with aliases later.
+  var namesReference = _.map(neighborhoods, function(neighborhood){
+    return cleanNeighborhoodName(neighborhood.name);
+  });
+
   // Read the source data, and for each `NEIGHBORHOOD`, check for a matching
   // name on the main `neighborhoods` array.  If a value from the source data
   // and a name in the `neighborhoods` array matches, set the alias in the
@@ -94,12 +99,19 @@ function setNeighborhoodAliases(neighborhoods){
     .on('column', function(key, value){
       if(key === 'NEIGHBORHOOD'){
         var matcher = cleanNeighborhoodName(value);
-        _.forEach(neighborhoods, _.partial(setNeighborhoodAlias, _, matcher, value));
 
-        // Stop reading the source file early if we finish assigning aliases.
-        if(!_.find(neighborhoods, _.negate(hasAlias))){
-          sourceDataSteam.destroy();
+        // If "cleaned" value from source file is found in "clean" neighborhood names array,
+        // set the alias.
+        var matchingNeighborhoodIndex = namesReference.indexOf(matcher);
+        if(matchingNeighborhoodIndex > -1 && !hasAlias(neighborhoods[matchingNeighborhoodIndex])){
+          neighborhoods[matchingNeighborhoodIndex].alias = value;
+
+          // Stop reading the source file early if we finish assigning aliases.
+          if(!_.find(neighborhoods, _.negate(hasAlias))){
+            sourceDataSteam.destroy();
+          }
         }
+
       }
     });
 
@@ -144,14 +156,6 @@ function writeAliases(neighborhoods){
 /**
  * Neighborhood name utility functions
  */
-
-function setNeighborhoodAlias(neighborhood, cleanFoundNeighborhood, alias){
-  var cleanGeojsonName = cleanNeighborhoodName(neighborhood.name);
-  if(cleanGeojsonName === cleanFoundNeighborhood){
-    neighborhood.alias = alias;
-    return false;
-  }
-}
 
 function hasAlias(neighborhood){
   return neighborhood.alias;

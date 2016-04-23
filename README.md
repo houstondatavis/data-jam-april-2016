@@ -29,3 +29,7 @@ All of the public 3-1-1 Service Requests from the Lagan 311 system
 | Channel Type | How the ticket came in |
 
 from [Houston 311](http://www.houstontx.gov/311/) and [Houston Data Portal](http://data.ohouston.org/dataset/city-of-houston-311-service-requests)
+
+# Neighborhoods
+
+Neighborhoods from the `NEIGHBORHOOD` column in the 311 data match the `features.*.properties.alias` value in [`neighborhoods\boundaries-with-aliases.geojson`](https://github.com/houstondatavis/data-jam-april-2016/blob/master/neighborhoods/boundaries-with-aliases.geojson).  The geojson data is sourced from [everyblock's api](http://www.everyblock.com/developers/location-boundaries/).

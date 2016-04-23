@@ -1,1 +1,6 @@
 node_modules
+package.json
+
+income2010
+*.R
+*.js

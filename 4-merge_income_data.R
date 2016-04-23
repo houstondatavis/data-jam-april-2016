@@ -5,7 +5,7 @@ require(maptools)
 # load files
 d <- read_delim("311-Public-Data-Extract-2015-tab.txt", "\t") %>% mutate(IDX = 1:n())
 swm <- read_delim("311-Public-Data-Extract-2015-swm-tab.txt", "\t") %>% mutate(IDX = 1:n())
-shp <- readShapeSpatial("census2010/Median_Household_Income_by_Census_Block_Group_2010.shp")
+shp <- readShapeSpatial("income2010/Median_Household_Income_by_Census_Block_Group_2010.shp")
 
 # convert lon/lat to SpatialPoints (need to filter out missing cases)
 d_ll <- d %>% filter(!is.na(LONGITUDE)) %>% select(LONGITUDE, LATITUDE, IDX)

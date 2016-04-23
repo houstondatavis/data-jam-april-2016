@@ -10,3 +10,7 @@ d <- fread(sep = '|',
 					 na.strings = c("NA", "Unknown"),
 					 )
 
+
+d[which(d[, "NEIGHBORHOOD"] == "BRAESWOOD"), ] <- "BRAESWOOD PLACE"
+d[which(d[, "NEIGHBORHOOD"] == "FORT BEND HOUSTON"), ]  <- "FORT BEND / HOUSTON"
+d[which(d[, "NEIGHBORHOOD"] == "OST / SOUTH UNION"), ]  <- "GREATER OST / SOUTH UNION"

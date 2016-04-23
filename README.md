@@ -27,3 +27,5 @@ All of the public 3-1-1 Service Requests from the Lagan 311 system
 | LATITUDE | Decimal Degrees longitude |
 | LONGITUDE | Decimal Degrees longitude |
 | Channel Type | How the ticket came in |
+
+from [Houston 311](http://www.houstontx.gov/311/) and [Houston Data Portal](http://data.ohouston.org/dataset/city-of-houston-311-service-requests)

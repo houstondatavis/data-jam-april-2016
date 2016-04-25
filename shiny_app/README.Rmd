@@ -1,0 +1,13 @@
+---
+title: "README.Rmd"
+author: "Michael Eubanks"
+date: "April 25, 2016"
+output: html_document
+---
+
+## Shiny App to create interactive visualizations
+
+### To run this app within R studio:
+1. Clone parent repository onto the local desktop.
+2. Run 'create_sqllite_db.R' within parent directory to create the sqlite database.
+3. Open app.R and click RunApp
